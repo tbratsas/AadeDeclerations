@@ -1,0 +1,17 @@
+# Session cookies του TAXISnet — ΠΟΤΕ σε repo
+.profile/
+
+# Προσωπικά δεδομένα πελατών
+afm.txt
+logs/
+
+node_modules/
+
+# Cookies ενεργής συνεδρίας — ισοδυναμεί με σύνδεση
+.auth-state.json
+
+# Πακετάρισμα
+vendor/
+dist/
+dist-full/
+dist-lite/

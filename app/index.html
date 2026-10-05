@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="el">
+<head>
+<meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy"
+      content="default-src 'none'; script-src 'self'; style-src 'self'; img-src 'self' data:;">
+<title>Εξουσιοδοτήσεις myAADE</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+<header class="bar">
+  <div class="brand">
+    <span class="dot" id="sessionDot" title="Κατάσταση συνεδρίας"></span>
+    <strong>Εξουσιοδοτήσεις myAADE</strong>
+    <span class="sub">Πάροχος Ηλεκτρονικής Τιμολόγησης</span>
+  </div>
+  <div class="bar-actions">
+    <button id="btnLogin" class="ghost">Σύνδεση</button>
+    <button id="btnLogs" class="ghost">Φάκελος αρχείων</button>
+  </div>
+</header>
+
+<main>
+  <!-- ΑΡΙΣΤΕΡΑ: είσοδος -->
+  <section class="pane pane-input">
+    <div class="pane-head">
+      <h2>ΑΦΜ πελατών</h2>
+      <span id="afmCount" class="pill">—</span>
+    </div>
+
+    <textarea id="afm" spellcheck="false"
+      placeholder="Ένα ΑΦΜ ανά γραμμή.&#10;Μπορείς να κάνεις paste στήλη κατευθείαν από Excel.&#10;&#10;111111111&#10;222222222;ΕΠΩΝΥΜΙΑ ΠΕΛΑΤΗ&#10;333333333"></textarea>
+
+    <div id="afmWarn" class="warn hidden"></div>
+
+    <div class="row">
+      <button id="btnImport" class="ghost">Εισαγωγή από αρχείο…</button>
+      <label class="chk">
+        <input type="checkbox" id="recheck">
+        <span>Έλεγχος ξανά όλων <small>(αγνοεί το ιστορικό)</small></span>
+      </label>
+    </div>
+
+    <div class="actions">
+      <button id="btnDry" class="primary">Δοκιμαστικά</button>
+      <button id="btnGo" class="danger" disabled title="Τρέξε πρώτα δοκιμαστικά">Κανονικά</button>
+      <button id="btnStop" class="ghost" disabled>Διακοπή</button>
+    </div>
+
+    <p id="gateNote" class="note">
+      Το «Κανονικά» ενεργοποιείται αφού τρέξεις <strong>δοκιμαστικά</strong> για την τρέχουσα λίστα
+      και δεις τι πρόκειται να γίνει.
+    </p>
+  </section>
+
+  <!-- ΔΕΞΙΑ: εξέλιξη + αποτελέσματα -->
+  <section class="pane pane-out">
+    <div class="progress-wrap">
+      <div class="progress"><div id="bar" class="bar-fill"></div></div>
+      <div id="progressText" class="progress-text">Έτοιμο</div>
+    </div>
+
+    <div id="chips" class="chips"></div>
+
+    <div class="table-wrap">
+      <table id="tbl">
+        <thead>
+          <tr><th>ΑΦΜ</th><th>Επωνυμία</th><th>Κατάσταση</th><th>Σημείωση</th></tr>
+        </thead>
+        <tbody id="tbody"></tbody>
+      </table>
+      <div id="empty" class="empty">Δεν υπάρχουν ακόμα αποτελέσματα.</div>
+    </div>
+
+    <div class="row out-actions">
+      <button id="btnExport" class="ghost">Εξαγωγή CSV</button>
+      <span id="status" class="status"></span>
+    </div>
+  </section>
+</main>
+
+<script src="renderer.js"></script>
+</body>
+</html>

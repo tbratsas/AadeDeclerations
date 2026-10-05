@@ -1,0 +1,78 @@
+{
+  "name": "aade-auth-accept",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Μαζική αποδοχή εξουσιοδοτήσεων ηλεκτρονικής τιμολόγησης στο myAADE",
+  "scripts": {
+    "dry": "node src/aade-accept.js",
+    "go": "node src/aade-accept.js --go",
+    "app": "electron .",
+    "dist": "node scripts/prepare-browsers.js && electron-builder --win",
+    "prepare:browsers": "node scripts/prepare-browsers.js",
+    "dist:lite": "node scripts/prepare-browsers.js --lite && electron-builder --win"
+  },
+  "dependencies": {
+    "playwright": "^1.49.0"
+  },
+  "main": "app/main.js",
+  "devDependencies": {
+    "electron": "^33.2.0",
+    "electron-builder": "^25.1.8"
+  },
+  "build": {
+    "appId": "gr.bratnet.aade-authorizations",
+    "productName": "Exousiodotiseis myAADE",
+    "artifactName": "AADE-Exousiodotiseis-${version}-${arch}.${ext}",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "app/**/*",
+      "src/**/*",
+      "package.json",
+      "!**/*.md",
+      "!**/*.map"
+    ],
+    "asarUnpack": [
+      "**/node_modules/playwright/**",
+      "**/node_modules/playwright-core/**"
+    ],
+    "extraResources": [
+      {
+        "from": "vendor/ms-playwright",
+        "to": "ms-playwright"
+      }
+    ],
+    "win": {
+      "target": [
+        {
+          "target": "nsis",
+          "arch": [
+            "x64"
+          ]
+        },
+        {
+          "target": "portable",
+          "arch": [
+            "x64"
+          ]
+        }
+      ],
+      "signAndEditExecutable": false
+    },
+    "nsis": {
+      "oneClick": false,
+      "perMachine": false,
+      "allowToChangeInstallationDirectory": true,
+      "shortcutName": "Εξουσιοδοτήσεις myAADE"
+    },
+    "portable": {
+      "artifactName": "AADE-Exousiodotiseis-${version}-portable.${ext}"
+    },
+    "compression": "maximum",
+    "electronLanguages": [
+      "en-US",
+      "el"
+    ]
+  }
+}
